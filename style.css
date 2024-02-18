@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Muli', sans-serif;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.7), 
+            rgba(0, 0, 0, 0.7)
+        ),
+        url('20240211_233718.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*menu bar at the top*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 200px;
+    background: greenyellow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+}
+
+.logo {
+    font-size: 3em;
+    color: #345;
+    user-select: none;
+    
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #000;
+    text-decoration: dotted;
+    font-weight: 1000;
+    margin-left: 40px;
+}
+
+.navigation a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 6px;
+ 
+    transform:scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after {
+
+    transform:scaleX(1);
+    
+}
+
+.navigation .btnLogin-popup{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #234;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #234;
+    font-weight: 500;
+    margin-left:40px;
+    transition: .5s;
+
+}
+
+.navigation .btnLogin-popup:hover {
+    background: #fff;
+    color: #162938;
+}
+
+/*login box*/
+.wrapper {
+    position:relative;
+    width: 600px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255,255,.5);
+    border-radius: 20px;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden; /*hides edge of the X button*/
+    transform:scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+.name-input {
+    display: flex;
+    justify-content: space-between;
+}
+/**/
+.name-wrapper {
+    width: 45%;
+    position: relative;
+}
+
+.divider {
+    width: 5%;
+}
+
+.wrapper.active-popup{
+    transform:scale(1);
+}
+
+.wrapper.active {
+    height: 520px;
+}
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px; /*the invisible restriction box of login box so things dont go from edge to edge*/
+}
+
+/*translate 'Login' back to main when wrapper is NOT active*/
+.wrapper .form-box.login{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+/*translate 'Login' away from main when wrapper is active*/
+.wrapper.active .form-box.login{
+    transition: none;
+    transform: translate(-600px);
+}
+
+/*translate 'Register' away from main when wrapper is NOT active*/
+.wrapper .form-box.register{
+    position: absolute;
+    transition: none;
+    transform: translateX(600px);
+}
+
+/*translate 'Register' back to main when wrapper is active*/
+.wrapper.active .form-box.register{
+    transition: .18s ease;
+    transform: translate(0px);
+}
+
+.wrapper .icon-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: greenyellow;
+    font-size: 2em;
+    font-weight: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+
+}
+
+.form-box h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #fff;
+    margin: 30px 0;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+
+}
+
+.input-box input:focus~label,
+.input-box input:not(:placeholder-shown):valid~label {
+    top: -5px;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 600;
+    padding: 0 40px 0 5px; /*restricts how far the text can go, 40px makes it so it doesn't reach the lock icon*/
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 2em;
+    color: #fff;
+    line-height: 20px;
+}
+
+/*remember me and forgot password line*/
+.remember-forgot {
+    font-size: .9em;
+    color: #888888;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.remember-forgot label input{
+    accent-color: #f00;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color: #867f96;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+
+/*login button*/
+.btn {
+    width: 100%;
+    height: 45px;
+    background: greenyellow;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color:#162938;
+    font-weight: 800;
+}
+
+.login-register {
+    font-size: .9em;
+    color: whitesmoke;
+    text-align: center;
+    font-weight: 500;
+    margin: 20px 0 10px; /*change 5px to move text/line up and down*/
+}
+
+.login-register p a {
+    color: #867f96;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-register p a:hover{
+    text-decoration: underline;
+}
